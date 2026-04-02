@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
 // Nếu chưa chọn level thì hiển thị form chọn cấp độ
 $levels = ['N5', 'N4', 'N3', 'N2'];
 $level = isset($_GET['level']) ? $_GET['level'] : null;

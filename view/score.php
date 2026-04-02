@@ -1,6 +1,10 @@
 <?php
 // score.php: Chấm điểm và lưu kết quả vào exam_results, result_details
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
 $dbHost = '127.0.0.1';
 $dbName = 'jlpt_ai_learning';
 $dbUser = 'root';
