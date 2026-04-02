@@ -1,21 +1,8 @@
 <?php
 // Cấu hình DB — chỉnh lại theo môi trường của bạn
-$dbHost = '127.0.0.1';
-$dbName = 'jlpt_ai_learning';
-$dbUser = 'root';
-$dbPass = '';
-
+require_once 'view/db.php';
 // Đường dẫn tới file data.json (chỉnh nếu khác)
 $jsonPath = __DIR__ . '/data.json';
-
-try {
-    $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8mb4", $dbUser, $dbPass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-} catch (PDOException $e) {
-    die("DB connect error: " . $e->getMessage());
-}
 
 if (!file_exists($jsonPath)) {
     die("File not found: $jsonPath");
@@ -78,12 +65,23 @@ if (!empty($data['notes']) && is_array($data['notes'])) {
         $fields = $note['fields'] ?? [];
         // Mapping: tuỳ vào cấu trúc fields, bạn có thể cần điều chỉnh lại thứ tự dưới đây
         $structure_name = $fields[1] ?? null; // ví dụ: ~わけだ
-        $meaning = $fields[2] ?? null; // ví dụ: giải thích ý nghĩa
+        
+        // Ép thêm thông tin phong phú từ các trường Anki vào cột meaning
+        $en_explanation = $fields[2] ?? ''; // Giải thích Anh
+        $jp_explanation = $fields[7] ?? ''; // Giải thích Nhật
+        $summary = $fields[10] ?? '';       // Ý nghĩa ngắn gọn
+        $image = $fields[11] ?? '';         // Hình ảnh (nếu có)
+
+        // Kết hợp lại thành một nội dung đầy đủ kiến thức
+        $combined_meaning = "<b>$summary</b><br><br><b>[JP]:</b> $jp_explanation<br><b>[EN]:</b> $en_explanation<br>$image";
+        $meaning = (trim($fields[10]) !== '' || trim($fields[7]) !== '') ? $combined_meaning : null;
+
         $usage_rules = $fields[3] ?? null; // ví dụ: cấu trúc ngữ pháp
         // Lấy ví dụ: gom các fields còn lại thành mảng ví dụ
         $examplesArr = [];
         for ($i = 4; $i < count($fields); $i++) {
-            if (trim($fields[$i]) !== '') {
+            // Bỏ qua trường chứa ảnh và index quá cao không phải ví dụ
+            if (trim($fields[$i]) !== '' && strpos($fields[$i], '<img') === false && $i < 10) {
                 $examplesArr[] = $fields[$i];
             }
         }
@@ -92,8 +90,8 @@ if (!empty($data['notes']) && is_array($data['notes'])) {
         $level = null;
         if (!empty($note['tags']) && is_array($note['tags'])) {
             foreach ($note['tags'] as $tag) {
-                if (preg_match('/N[2-5]/', $tag)) {
-                    $level = $tag;
+                if (preg_match('/(N[2-5])/', $tag, $matches)) {
+                    $level = $matches[1]; // Lấy đúng N2, N3... thay vì JLPT.N2
                     break;
                 }
             }

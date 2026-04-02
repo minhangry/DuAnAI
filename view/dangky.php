@@ -48,67 +48,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Đăng ký tài khoản JLPT</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container py-4" style="max-width:500px;">
-    <h2 class="mb-4 text-center">Đăng ký tài khoản</h2>
-    <?php if ($success): ?>
-        <div class="alert alert-success">Đăng ký thành công! <a href="login.php">Đăng nhập ngay</a></div>
-    <?php endif; ?>
-    <?php if ($errors): ?>
-        <div class="alert alert-danger">
-            <?php foreach ($errors as $e) echo '<div>' . htmlspecialchars($e) . '</div>'; ?>
+<?php include 'includes/header.php'; ?>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h2 class="mb-4 text-center fw-bold text-primary">Đăng ký thành viên</h2>
+                    <?php if ($errors): ?>
+                        <div class="alert alert-danger small">
+                            <?php foreach ($errors as $e) echo '<div>' . htmlspecialchars($e) . '</div>'; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form method="POST" autocomplete="off">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tên đăng nhập</label>
+                            <input type="text" name="username" class="form-control" required value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <input type="email" name="email" class="form-control" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label fw-semibold">Mật khẩu</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label class="form-label fw-semibold">Nhập lại</label>
+                                <input type="password" name="confirm" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <label class="form-label fw-semibold small text-uppercase">Trình độ hiện tại</label>
+                                <select name="current_level" class="form-select">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="N5">N5</option><option value="N4">N4</option><option value="N3">N3</option><option value="N2">N2</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label fw-semibold small text-uppercase">Mục tiêu</label>
+                                <select name="target_level" class="form-select text-primary fw-bold">
+                                    <option value="N5">N5</option><option value="N4">N4</option><option value="N3">N3</option><option value="N2">N2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Tạo tài khoản</button>
+                        </div>
+                    </form>
+                    <div class="mt-4 text-center">
+                        Đã có tài khoản? <a href="login.php" class="text-decoration-none">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    <?php endif; ?>
-    <form method="POST" autocomplete="off">
-        <div class="mb-3">
-            <label class="form-label">Tên đăng nhập</label>
-            <input type="text" name="username" class="form-control" required value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Nhập lại mật khẩu</label>
-            <input type="password" name="confirm" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Trình độ hiện tại</label>
-            <select name="current_level" class="form-select">
-                <option value="Beginner">Beginner</option>
-                <option value="N5">N5</option>
-                <option value="N4">N4</option>
-                <option value="N3">N3</option>
-                <option value="N2">N2</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Trình độ mục tiêu</label>
-            <select name="target_level" class="form-select">
-                <option value="N5">N5</option>
-                <option value="N4">N4</option>
-                <option value="N3">N3</option>
-                <option value="N2">N2</option>
-            </select>
-        </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary btn-lg">Đăng ký</button>
-        </div>
-    </form>
-    <div class="mt-3 text-center">
-        Đã có tài khoản? <a href="login.php">Đăng nhập</a>
     </div>
 </div>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

@@ -1,19 +1,7 @@
 <?php
 // readjson2.php: Import dữ liệu từ N3-1.json vào bảng questions
-$dbHost = '127.0.0.1';
-$dbName = 'jlpt_ai_learning';
-$dbUser = 'root';
-$dbPass = '';
+require_once 'view/db.php';
 $jsonPath = __DIR__ . '/N3-1.json';
-
-try {
-    $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8mb4", $dbUser, $dbPass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-} catch (PDOException $e) {
-    die("DB connect error: " . $e->getMessage());
-}
 
 if (!file_exists($jsonPath)) {
     die("File not found: $jsonPath");
