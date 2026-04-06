@@ -126,5 +126,4 @@ document.querySelectorAll('.quiz-answer').forEach(input => {
     });
 });
 </script>
-
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

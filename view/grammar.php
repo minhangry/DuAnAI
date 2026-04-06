@@ -88,11 +88,23 @@ $lessons = $stmt->fetchAll();
                                     <div class="usage-label mb-2">Ví dụ tiêu biểu</div>
                                     <ul class="list-unstyled example-list mb-0 small text-muted">
                                         <?php 
-                                        $examples = json_decode($l['examples']);
+                                        // Sử dụng true để giải mã thành mảng Associative Array thay vì stdClass Object
+                                        $examples = json_decode($l['examples'], true);
                                         if (is_array($examples)):
-                                            foreach (array_slice($examples, 0, 3) as $ex): ?>
-                                                <li><?php echo strip_tags($ex, '<b><strong>'); ?></li>
-                                            <?php endforeach; 
+                                            foreach (array_slice($examples, 0, 3) as $ex): 
+                                                // Nếu là định dạng mới có cặp ja - vi
+                                                if (is_array($ex) && isset($ex['ja'])): ?>
+                                                    <li>
+                                                        <div class="jap-text text-dark fw-bold"><?php echo strip_tags($ex['ja'], '<b><strong>'); ?></div>
+                                                        <div class="fst-italic"><?php echo strip_tags($ex['vi'] ?? '', '<b><strong>'); ?></div>
+                                                    </li>
+                                                <?php else: 
+                                                    // Nếu là định dạng cũ chỉ có chuỗi String
+                                                    $exStr = is_string($ex) ? $ex : json_encode($ex, JSON_UNESCAPED_UNICODE);
+                                                ?>
+                                                    <li><?php echo strip_tags($exStr, '<b><strong>'); ?></li>
+                                                <?php endif;
+                                            endforeach; 
                                         endif; ?>
                                     </ul>
                                 </div>

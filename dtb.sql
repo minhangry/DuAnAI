@@ -86,3 +86,23 @@ CREATE TABLE ai_roadmaps (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Ngày AI tạo lộ trình',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB COMMENT='Lưu trữ lộ trình cá nhân hóa do AI phân tích và đề xuất';
+-- Bảng lưu trữ Chủ đề Flashcard
+CREATE TABLE flashcard_topics (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL COMMENT 'Tên chủ đề (vd: Gia đình, Công việc)',
+    level ENUM('N5', 'N4', 'N3', 'N2', 'N1') NOT NULL COMMENT 'Cấp độ JLPT',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB COMMENT='Bảng chứa danh sách các chủ đề từ vựng';
+
+-- Bảng lưu trữ Từ vựng thuộc Chủ đề
+CREATE TABLE flashcard_words (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    topic_id INT NOT NULL COMMENT 'Khóa ngoại liên kết tới flashcard_topics',
+    word VARCHAR(100) NOT NULL COMMENT 'Từ vựng tiếng Nhật (Kanji/Kana)',
+    reading VARCHAR(100) NOT NULL COMMENT 'Cách đọc (Hiragana/Katakana)',
+    meaning TEXT NOT NULL COMMENT 'Ý nghĩa tiếng Việt',
+    example TEXT NULL COMMENT 'Câu ví dụ (nếu có)',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (topic_id) REFERENCES flashcard_topics(id) ON DELETE CASCADE
+) ENGINE=InnoDB COMMENT='Bảng chứa các từ vựng chi tiết cho từng chủ đề';
+
