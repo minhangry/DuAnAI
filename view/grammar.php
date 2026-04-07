@@ -6,16 +6,30 @@ if (!isset($_SESSION['user_id'])) {
 }
 require_once 'db.php';
 
-$level = $_GET['level'] ?? 'N2';
+$level = $_GET['level'] ?? ''; // Mặc định để trống để có thể tìm kiếm toàn bộ nếu cần
 $search = trim($_GET['search'] ?? '');
 
-$query = "SELECT * FROM grammar_lessons WHERE level = ?";
-$params = [$level];
+// Chuẩn hóa từ khóa: Chuyển dấu ~ thành ～ để khớp với dữ liệu tiếng Nhật thường lưu trong DB
+$searchQuery = str_replace('~', '～', $search);
+
+// Khởi tạo truy vấn cơ bản
+$query = "SELECT * FROM grammar_lessons WHERE 1=1";
+$params = [];
+
+// Nếu có chọn level cụ thể (N5, N4, N3, N2)
+if ($level !== '') {
+    $query .= " AND level = ?";
+    $params[] = $level;
+}
 
 if ($search !== '') {
-    $query .= " AND (structure_name LIKE ? OR meaning LIKE ?)";
-    $params[] = "%$search%";
-    $params[] = "%$search%";
+    // Mở rộng tìm kiếm sang cả cách dùng (usage_rules) và ví dụ (examples)
+    $query .= " AND (structure_name LIKE ? OR meaning LIKE ? OR usage_rules LIKE ? OR examples LIKE ?)";
+    $searchTerm = "%$searchQuery%";
+    $params[] = $searchTerm;
+    $params[] = $searchTerm;
+    $params[] = $searchTerm;
+    $params[] = $searchTerm;
 }
 
 $query .= " ORDER BY structure_name ASC";
@@ -37,14 +51,14 @@ $lessons = $stmt->fetchAll();
 
 <div class="container py-4">
     <div class="text-center mb-5">
-        <h2 class="fw-bold text-primary">Thư viện Ngữ pháp <span class="badge bg-primary rounded-pill"><?php echo htmlspecialchars($level); ?></span></h2>
+        <h2 class="fw-bold text-primary">Thư viện Ngữ pháp <span class="badge bg-primary rounded-pill"><?php echo htmlspecialchars($level ?: 'Tất cả'); ?></span></h2>
         <p class="text-muted">Tổng hợp kiến thức ngữ pháp JLPT từ các nguồn tin cậy</p>
     </div>
 
     <div class="row justify-content-center mb-5">
         <div class="col-md-8">
             <form method="GET" class="d-flex gap-2">
-                <input type="hidden" name="level" value="<?php echo htmlspecialchars($level); ?>">
+                <?php if($level): ?><input type="hidden" name="level" value="<?php echo htmlspecialchars($level); ?>"><?php endif; ?>
                 <input type="text" name="search" class="form-control search-box shadow-sm" placeholder="Tìm kiếm cấu trúc hoặc ý nghĩa..." value="<?php echo htmlspecialchars($search); ?>">
                 <button type="submit" class="btn btn-primary px-4 rounded-pill shadow-sm">Tìm kiếm</button>
             </form>
@@ -52,6 +66,9 @@ $lessons = $stmt->fetchAll();
     </div>
     
     <div class="d-flex justify-content-center mb-5 gap-2 flex-wrap">
+        <a href="?level=&search=<?php echo urlencode($search); ?>" class="btn <?php echo $level === '' ? 'btn-primary shadow' : 'btn-outline-primary'; ?> px-4 rounded-pill fw-bold">
+            Tất cả
+        </a>
         <?php foreach(['N5', 'N4', 'N3', 'N2'] as $lv): ?>
             <a href="?level=<?php echo $lv; ?>&search=<?php echo urlencode($search); ?>" class="btn <?php echo $level === $lv ? 'btn-primary shadow' : 'btn-outline-primary'; ?> px-4 rounded-pill fw-bold">
                 <?php echo $lv; ?>
