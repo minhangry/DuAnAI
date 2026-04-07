@@ -1,0 +1,211 @@
+TÀI LIỆU NGỮ PHÁP JLPT TẬP TRUNG
+
+Mục tiêu:
+- Giúp người học nhận ra mình sai ở đâu trong phần ngữ pháp JLPT.
+- Ôn lại kiến thức cốt lõi bằng giải thích ngắn gọn, dễ hiểu.
+- Luyện ngay bằng bài tập ngắn để nhớ lâu hơn.
+
+----------------------------------------
+1. TRỢ TỪ VÀ MẪU GIỚI HẠN
+----------------------------------------
+
+1.1. だけ
+Ý nghĩa:
+- Chỉ, chỉ có, duy nhất.
+
+Cách dùng:
+- Danh từ + だけ
+- Động từ thể từ điển + だけ
+
+Ví dụ:
+- 水だけ飲みました。
+  Tôi chỉ uống nước.
+- 今日は文法だけ勉強します。
+  Hôm nay tôi chỉ học ngữ pháp.
+
+Điểm dễ nhầm:
+- だけ chỉ đơn thuần là “chỉ”.
+- Không mang sắc thái phủ định mạnh như しか～ない.
+
+1.2. しか～ない
+Ý nghĩa:
+- Chỉ còn, chỉ có, ngoài ra không có.
+
+Cách dùng:
+- Danh từ + しか + phủ định
+
+Ví dụ:
+- 千円しかありません。
+  Tôi chỉ có 1000 yên.
+- 日曜日しか休みません。
+  Tôi chỉ nghỉ vào Chủ nhật.
+
+Điểm dễ nhầm:
+- Sau しか bắt buộc thường đi với phủ định.
+- Nếu dùng sai sang câu khẳng định sẽ không tự nhiên.
+
+1.3. ばかり
+Ý nghĩa:
+- Toàn, chỉ toàn, suốt ngày.
+- Dùng khi một hành động hoặc trạng thái lặp lại quá nhiều.
+
+Ví dụ:
+- 彼は遊んでばかりいます。
+  Cậu ấy suốt ngày chỉ chơi.
+- 甘いものばかり食べるのはよくないです。
+  Chỉ ăn đồ ngọt thì không tốt.
+
+1.4. ほど
+Ý nghĩa:
+- Mức độ, đến mức.
+- Dùng trong so sánh hoặc nhấn mạnh mức độ.
+
+Ví dụ:
+- 歩けないほど疲れました。
+  Tôi mệt đến mức không đi nổi.
+- 今年は去年ほど寒くないです。
+  Năm nay không lạnh bằng năm ngoái.
+
+----------------------------------------
+2. KÍNH NGỮ VÀ CÁCH NÓI LỊCH SỰ
+----------------------------------------
+
+2.1. ございます
+Ý nghĩa:
+- Là dạng lịch sự của あります.
+
+Ví dụ:
+- 受付はあちらにございます。
+  Quầy tiếp tân ở phía bên kia.
+- ご質問がございましたら、どうぞ。
+  Nếu có câu hỏi, xin mời.
+
+2.2. いらっしゃる
+Ý nghĩa:
+- Là kính ngữ của いる / 行く / 来る.
+
+Ví dụ:
+- 先生は教室にいらっしゃいます。
+  Thầy/cô đang ở trong lớp.
+- 部長はもういらっしゃいました。
+  Trưởng phòng đã đến rồi.
+
+2.3. 申す
+Ý nghĩa:
+- Là khiêm nhường ngữ của 言う.
+
+Ví dụ:
+- 私はリンと申します。
+  Tôi tên là Linh.
+- 後でご連絡すると申しておりました。
+  Tôi đã nói là sẽ liên lạc lại sau.
+
+Mẹo học:
+- Tạo bảng so sánh:
+  言う -> おっしゃる / 申す
+  行く・来る・いる -> いらっしゃる / 参る
+  する -> なさる / いたす
+
+----------------------------------------
+3. TRÍCH DẪN VÀ SUY ĐOÁN
+----------------------------------------
+
+3.1. と
+Ý nghĩa:
+- Dùng để trích dẫn trực tiếp hoặc gián tiếp.
+
+Ví dụ:
+- 先生は「頑張って」と言いました。
+  Giáo viên nói: “Cố gắng lên”.
+- 彼は明日来ると言いました。
+  Anh ấy nói rằng ngày mai sẽ đến.
+
+3.2. そうだ
+Ý nghĩa:
+- Nghe nói, theo như nghe được.
+
+Ví dụ:
+- 天気予報によると、明日は雨だそうです。
+  Theo dự báo thời tiết thì nghe nói mai sẽ mưa.
+
+3.3. らしい
+Ý nghĩa:
+- Có vẻ là, hình như là, nghe nói là.
+
+Ví dụ:
+- あの人は日本語の先生らしいです。
+  Người đó có vẻ là giáo viên tiếng Nhật.
+
+3.4. だろう
+Ý nghĩa:
+- Có lẽ, chắc là.
+- Thể hiện suy đoán tương đối chắc chắn.
+
+Ví dụ:
+- 明日は寒くなるだろう。
+  Có lẽ ngày mai sẽ lạnh hơn.
+- 彼もこのニュースを知っているだろう。
+  Chắc anh ấy cũng biết tin này rồi.
+
+----------------------------------------
+4. CÁCH PHÂN TÍCH LỖI NGỮ PHÁP TRONG ĐỀ JLPT
+----------------------------------------
+
+Khi làm sai một câu ngữ pháp, hãy kiểm tra 4 điểm sau:
+- Mẫu câu đó diễn tả ý nghĩa gì.
+- Sau mẫu ngữ pháp đó đi với danh từ, động từ hay tính từ.
+- Câu đang ở khẳng định hay phủ định.
+- Sắc thái câu là lịch sự, trung tính hay trang trọng.
+
+Ví dụ phân tích:
+- Câu sai: コーヒー（だけ / しか / ばかり / ほど）飲みます。
+- Nếu câu khẳng định, “だけ” hợp hơn “しか”.
+- Nếu dùng “しか” phải sửa thành:
+  コーヒーしか飲みません。
+
+----------------------------------------
+5. BÀI TẬP LUYỆN NHANH
+----------------------------------------
+
+Bài 1. Chọn đáp án đúng:
+1. お金が500円（だけ・しか）あります。
+2. 彼は毎日ゲームして（だけ・ばかり）います。
+3. 社長は会議室に（ございます・いらっしゃいます）。
+4. 明日はたぶん雨が降る（そうだ・だろう）。
+5. 田中さんは明日来る（と・だけ）言いました。
+
+Bài 2. Sửa lỗi sai:
+1. ジュースしか飲みます。
+2. 先生は図書館にございます。
+3. 彼は「ありがとう」だろう言いました。
+
+Bài 3. Tự viết câu:
+- Viết 1 câu dùng だけ.
+- Viết 1 câu dùng しか～ない.
+- Viết 1 câu dùng だろう.
+- Viết 1 câu dùng いらっしゃる.
+
+----------------------------------------
+6. ĐÁP ÁN THAM KHẢO
+----------------------------------------
+
+Bài 1:
+1. だけ
+2. ばかり
+3. いらっしゃいます
+4. だろう
+5. と
+
+Bài 2:
+1. ジュースしか飲みません。
+2. 先生は図書館にいらっしゃいます。
+3. 彼は「ありがとう」と言いました。
+
+----------------------------------------
+7. GỢI Ý TỰ HỌC SAU KHI XONG TÀI LIỆU
+----------------------------------------
+
+- Đọc lại những câu bạn sai trong đề thật.
+- Gạch chân từ khóa ngữ pháp trong từng câu.
+- Viết lại mỗi mẫu ngữ pháp ít nhất 3 câu mới.
+- Sau 1 ngày, quay lại làm lại bài tập ở mục 5 mà không xem đáp án.

@@ -1,0 +1,145 @@
+TÀI LIỆU ĐỌC HIỂU JLPT
+
+Mục tiêu:
+- Giúp người học biết cách đọc câu hỏi và đoạn văn hiệu quả hơn.
+- Hạn chế chọn nhầm đáp án do hiểu sai ý chính.
+- Luyện ngay bằng đoạn đọc ngắn và câu hỏi mẫu.
+
+----------------------------------------
+1. QUY TRÌNH ĐỌC HIỂU NHANH
+----------------------------------------
+
+Bước 1. Đọc câu hỏi trước
+- Xem đề hỏi gì trước khi đọc đoạn văn.
+- Chú ý các từ khóa như:
+  ai, khi nào, lý do, mục đích, kết quả, ý chính.
+
+Bước 2. Gạch chân từ khóa
+- Tên người
+- Thời gian
+- Số lượng
+- Từ nối như: しかし, だから, つまり, たとえば
+
+Bước 3. Xác định ý chính
+- Đoạn này đang giải thích điều gì?
+- Người viết muốn nhấn mạnh điều gì?
+
+Bước 4. Loại trừ đáp án sai
+- Đáp án quá cực đoan thường dễ sai.
+- Đáp án có từ giống bài đọc nhưng sai ý cũng rất hay xuất hiện.
+
+----------------------------------------
+2. MẸO LOẠI TRỪ ĐÁP ÁN
+----------------------------------------
+
+2.1. Cẩn thận với từ tuyệt đối
+Ví dụ:
+- いつも
+- 必ず
+- 全部
+- 絶対
+
+Nếu đoạn văn không khẳng định mạnh như vậy, đáp án thường sai.
+
+2.2. Cẩn thận với đáp án “na ná”
+- Có từ giống đoạn văn nhưng đổi nguyên nhân, kết quả hoặc chủ thể.
+
+2.3. Kiểm tra từ nối
+- しかし: nhưng
+- だから: vì vậy
+- つまり: tức là
+- そのため: do đó
+
+Từ nối thường quyết định hướng hiểu của cả câu.
+
+----------------------------------------
+3. ĐOẠN ĐỌC MẪU
+----------------------------------------
+
+Đoạn văn:
+田中さんは毎朝早く起きて、日本語を30分勉強しています。会社の仕事は忙しいですが、JLPTに合格したいので、毎日少しずつ続けています。疲れている日もありますが、短い時間でも勉強することが大切だと考えています。
+
+Dịch nghĩa:
+Anh Tanaka mỗi sáng đều dậy sớm và học tiếng Nhật 30 phút. Công việc ở công ty rất bận, nhưng vì muốn đỗ JLPT nên anh ấy vẫn tiếp tục học từng chút mỗi ngày. Cũng có những ngày mệt, nhưng anh ấy cho rằng dù chỉ học trong thời gian ngắn thì điều quan trọng là phải duy trì đều đặn.
+
+Phân tích:
+- Chủ đề: thói quen học JLPT của Tanaka.
+- Ý chính: bận vẫn học đều, duy trì mới quan trọng.
+- Từ khóa:
+  毎朝, 30分, 忙しい, 合格したい, 毎日少しずつ, 大切
+
+----------------------------------------
+4. CÂU HỎI MẪU THEO ĐOẠN ĐỌC
+----------------------------------------
+
+Câu 1. Vì sao Tanaka học tiếng Nhật mỗi ngày?
+a. Vì công việc yêu cầu
+b. Vì muốn đỗ JLPT
+c. Vì bạn bè rủ học
+
+Câu 2. Tanaka nghĩ điều gì là quan trọng?
+a. Học thật lâu mỗi ngày
+b. Chỉ học khi khỏe
+c. Duy trì học đều mỗi ngày
+
+Câu 3. Nội dung chính của đoạn là gì?
+a. Công việc của Tanaka rất dễ
+b. Tanaka duy trì học tiếng Nhật dù bận
+c. Tanaka không thích học buổi sáng
+
+----------------------------------------
+5. ĐÁP ÁN VÀ GIẢI THÍCH
+----------------------------------------
+
+Câu 1:
+- Đáp án đúng: b
+- Vì đoạn văn có câu:
+  JLPTに合格したいので
+  Vì muốn đỗ JLPT
+
+Câu 2:
+- Đáp án đúng: c
+- Vì đoạn nói:
+  短い時間でも勉強することが大切
+  Dù thời gian ngắn vẫn học mới là điều quan trọng.
+
+Câu 3:
+- Đáp án đúng: b
+- Ý chính của cả đoạn là sự duy trì học tập dù bận.
+
+----------------------------------------
+6. BÀI TẬP TỰ LUYỆN
+----------------------------------------
+
+Đoạn văn:
+山田さんは電車で学校へ通っています。家から学校まで少し遠いので、毎朝6時に起きなければなりません。大変ですが、電車の中で単語を覚えるようにしているので、時間をむだにしないです。
+
+Dịch nghĩa:
+Bạn Yamada đi học bằng tàu điện. Vì từ nhà đến trường hơi xa nên mỗi sáng phải dậy lúc 6 giờ. Tuy vất vả, nhưng vì cố gắng học từ vựng trên tàu nên bạn ấy không lãng phí thời gian.
+
+Câu hỏi:
+1. Vì sao Yamada phải dậy lúc 6 giờ?
+2. Yamada làm gì trên tàu điện?
+3. Ý chính của đoạn là gì?
+
+Gợi ý trả lời:
+- Nhà đến trường xa
+- Học từ vựng trên tàu
+- Biết tận dụng thời gian
+
+----------------------------------------
+7. ĐÁP ÁN THAM KHẢO
+----------------------------------------
+
+1. Vì nhà đến trường xa.
+2. Yamada học từ vựng trên tàu điện.
+3. Đoạn văn nói về việc tận dụng thời gian để học.
+
+----------------------------------------
+8. CÁCH TỰ HỌC SAU KHI LÀM XONG
+----------------------------------------
+
+- Tự tóm tắt mỗi đoạn đọc bằng 1 câu tiếng Việt.
+- Gạch chân từ nối trong đoạn.
+- Tự đặt 1 câu hỏi mới cho đoạn văn.
+- Sau đó đọc lại và trả lời mà không nhìn đáp án.

@@ -86,32 +86,20 @@ CREATE TABLE ai_roadmaps (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Ngày AI tạo lộ trình',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB COMMENT='Lưu trữ lộ trình cá nhân hóa do AI phân tích và đề xuất';
-<<<<<<< HEAD
-
 -- ==========================================
--- 7. Bảng flashcards: Từ vựng theo chủ đề
+-- 7. Bảng flashcard_topics: Chủ đề Flashcard
 -- ==========================================
-CREATE TABLE flashcards (
-    id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Khóa chính từ vựng',
-    theme VARCHAR(100) NOT NULL COMMENT 'Chủ đề từ vựng (VD: Công việc, Giao thông)',
-    word VARCHAR(255) NOT NULL COMMENT 'Từ vựng (Kanji/Kana)',
-    reading VARCHAR(255) NOT NULL COMMENT 'Cách đọc (Furigana)',
-    meaning TEXT NOT NULL COMMENT 'Nghĩa tiếng Việt',
-    example TEXT COMMENT 'Ví dụ minh họa',
-    level ENUM('N5', 'N4', 'N3', 'N2') NOT NULL DEFAULT 'N3' COMMENT 'Cấp độ JLPT',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Bảng lưu trữ từ vựng cho tính năng Flashcard';
-=======
--- Bảng lưu trữ Chủ đề Flashcard
-CREATE TABLE flashcard_topics (
+CREATE TABLE IF NOT EXISTS flashcard_topics (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL COMMENT 'Tên chủ đề (vd: Gia đình, Công việc)',
     level ENUM('N5', 'N4', 'N3', 'N2', 'N1') NOT NULL COMMENT 'Cấp độ JLPT',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB COMMENT='Bảng chứa danh sách các chủ đề từ vựng';
 
--- Bảng lưu trữ Từ vựng thuộc Chủ đề
-CREATE TABLE flashcard_words (
+-- ==========================================
+-- 8. Bảng flashcard_words: Từ vựng thuộc Chủ đề
+-- ==========================================
+CREATE TABLE IF NOT EXISTS flashcard_words (
     id INT AUTO_INCREMENT PRIMARY KEY,
     topic_id INT NOT NULL COMMENT 'Khóa ngoại liên kết tới flashcard_topics',
     word VARCHAR(100) NOT NULL COMMENT 'Từ vựng tiếng Nhật (Kanji/Kana)',
@@ -122,4 +110,3 @@ CREATE TABLE flashcard_words (
     FOREIGN KEY (topic_id) REFERENCES flashcard_topics(id) ON DELETE CASCADE
 ) ENGINE=InnoDB COMMENT='Bảng chứa các từ vựng chi tiết cho từng chủ đề';
 
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0

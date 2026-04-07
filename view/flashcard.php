@@ -7,12 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 require_once 'db.php';
 
 $level = $_GET['level'] ?? 'N3';
-<<<<<<< HEAD
-// Lấy ngẫu nhiên 20 thẻ để học mỗi lượt
-$stmt = $pdo->prepare("SELECT * FROM flashcards WHERE level = ? ORDER BY RAND() LIMIT 20");
-$stmt->execute([$level]);
-$flashcards = $stmt->fetchAll();
-=======
 $topic_id = $_GET['topic_id'] ?? null;
 
 $topics = [];
@@ -35,7 +29,6 @@ if ($topic_id) {
     $stmt_topics->execute([$level]);
     $topics = $stmt_topics->fetchAll();
 }
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0
 ?>
 <?php include 'includes/header.php'; ?>
 
@@ -112,39 +105,6 @@ if ($topic_id) {
     .learning-status { font-size: 0.85rem; font-weight: 600; color: #64748b; }
 </style>
 
-<<<<<<< HEAD
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold text-primary">Thẻ ghi nhớ thông minh</h2>
-        <div class="d-flex justify-content-center gap-2 mt-3">
-            <?php foreach(['N5', 'N4', 'N3', 'N2'] as $lv): ?>
-                <a href="?level=<?php echo $lv; ?>" class="btn btn-sm <?php echo $level === $lv ? 'btn-primary' : 'btn-outline-primary'; ?> rounded-pill px-3">
-                    <?php echo $lv; ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-    <?php if (empty($flashcards)): ?>
-        <div class="alert alert-info text-center rounded-4 border-0 shadow-sm">
-            Chưa có dữ liệu thẻ cho trình độ này. Hãy chạy <b>import_flashcards.php</b> để nhập dữ liệu.
-        </div>
-    <?php else: ?>
-        <div class="text-center mb-3 card-indicator">
-            Thẻ <span id="current-index">1</span> / <span id="total-cards"><?php echo count($flashcards); ?></span>
-        </div>
-
-        <div class="flashcard-container mb-5">
-            <div class="flashcard" id="card-inner">
-                <div class="flashcard-front">
-                    <h1 class="display-2 fw-bold mb-3" id="front-text"></h1>
-                    <div class="instruction"><i class="bi bi-cursor-fill"></i> Bấm để xem ý nghĩa</div>
-                </div>
-                <div class="flashcard-back">
-                    <h4 class="fw-bold border-bottom border-white border-opacity-25 pb-2 mb-3 w-100 text-center">Giải nghĩa</h4>
-                    <div id="back-text" class="w-100 text-start"></div>
-                </div>
-=======
 <div class="container py-4">
     <?php if (!$topic_id): ?>
         <!-- Giao diện chọn Chủ đề -->
@@ -158,7 +118,6 @@ if ($topic_id) {
                         <?php echo $lv; ?>
                     </a>
                 <?php endforeach; ?>
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0
             </div>
         </div>
 
@@ -182,7 +141,8 @@ if ($topic_id) {
                                 <?php
                                     $stmt_count = $pdo->prepare("SELECT COUNT(*) as total FROM flashcard_words WHERE topic_id = ?");
                                     $stmt_count->execute([$t['id']]);
-                                    $count = $stmt_count->fetch()['total'];
+                                    $countRow = $stmt_count->fetch();
+                                    $count = $countRow ? $countRow['total'] : 0;
                                 ?>
                                 <p class="text-muted mt-auto mb-0"><i class="bi bi-layer-backward"></i> <?php echo $count; ?> từ vựng</p>
                             </div>
@@ -278,71 +238,6 @@ if ($topic_id) {
 </div>
 
 <script>
-<<<<<<< HEAD
-    const flashcards = <?php echo json_encode($flashcards); ?>;
-    let currentIndex = 0;
-    const cardInner = document.getElementById('card-inner');
-    const frontText = document.getElementById('front-text');
-    const backText = document.getElementById('back-text');
-    const indexDisplay = document.getElementById('current-index');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-
-    function updateCard() {
-        if (flashcards.length === 0) return;
-        
-        // Reset trạng thái lật trước khi đổi nội dung
-        cardInner.classList.remove('is-flipped');
-        
-        setTimeout(() => {
-            const current = flashcards[currentIndex];
-            frontText.innerText = current.word;
-            backText.innerHTML = `
-                <div class="mb-3">
-                    <small class="text-uppercase opacity-75 d-block">Cách đọc (Furigana):</small>
-                    <h3 class="fw-bold">${current.reading}</h3>
-                </div>
-                <div class="mb-3">
-                    <small class="text-uppercase opacity-75 d-block">Ý nghĩa:</small>
-                    <div class="fs-5">${current.meaning}</div>
-                </div>
-                ${current.example ? `
-                <div class="small mt-auto pt-3 border-top border-white border-opacity-25">
-                    <small class="text-uppercase opacity-75 d-block">Ví dụ minh họa:</small>
-                    <div class="fst-italic">${current.example}</div>
-                </div>` : ''}
-            `;
-            indexDisplay.innerText = currentIndex + 1;
-            document.getElementById('total-cards').innerText = flashcards.length;
-            
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex === flashcards.length - 1;
-        }, 150);
-    }
-
-    function masterCard() {
-        if (flashcards.length === 0) return;
-        
-        // Xoá thẻ hiện tại khỏi mảng
-        flashcards.splice(currentIndex, 1);
-        
-        if (flashcards.length === 0) {
-            // Hiển thị giao diện khi đã thuộc hết
-            document.querySelector('.flashcard-container').innerHTML = `
-                <div class="text-center p-5 bg-white rounded-4 shadow-sm border">
-                    <i class="bi bi-trophy text-warning display-1"></i>
-                    <h3 class="fw-bold mt-3 text-primary">Tuyệt vời!</h3>
-                    <p class="text-muted">Bạn đã thuộc hết các thẻ trong lượt học này.</p>
-                    <button class="btn btn-primary rounded-pill px-4" onclick="location.reload()">Học lượt mới</button>
-                </div>
-            `;
-            document.querySelector('.card-indicator').style.display = 'none';
-            document.querySelector('.d-flex.justify-content-center.gap-4').style.display = 'none';
-        } else {
-            // Nếu xoá thẻ cuối cùng thì lùi index lại
-            if (currentIndex >= flashcards.length) {
-                currentIndex = flashcards.length - 1;
-=======
     // Dữ liệu gốc
     const allWords = <?php echo json_encode($words); ?>;
     // Hàng đợi học tập hiện tại
@@ -419,21 +314,13 @@ if ($topic_id) {
             for (let i = learningQueue.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [learningQueue[i], learningQueue[j]] = [learningQueue[j], learningQueue[i]];
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0
             }
             updateCard();
         }
 
-<<<<<<< HEAD
-    function nextCard() {
-        if (currentIndex < flashcards.length - 1) {
-            currentIndex++;
-=======
         function toggleSide() {
             isFlippedSide = !isFlippedSide;
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0
             updateCard();
-            // Toast thông báo (có thể thêm sau)
         }
 
         function restartLearning() {
@@ -472,32 +359,6 @@ if ($topic_id) {
         // Khởi tạo
         updateCard();
     }
-<<<<<<< HEAD
-
-    function shuffleCards() {
-        location.reload(); // Cách nhanh nhất để lấy RAND() mới từ server
-    }
-
-    // Sự kiện lật thẻ
-    cardInner.addEventListener('click', () => {
-        cardInner.classList.toggle('is-flipped');
-    });
-
-    // Phím tắt bàn phím
-    document.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') cardInner.click();
-        if (e.code === 'ArrowRight') nextCard();
-        if (e.code === 'ArrowLeft') prevCard();
-    });
-
-    // Khởi tạo thẻ đầu tiên
-    if (flashcards.length > 0) updateCard();
-=======
->>>>>>> 484deb05ac9f85d44008acad1a9ef4d65753e3b0
 </script>
-
-
-
-
 
 <?php include 'includes/footer.php'; ?>

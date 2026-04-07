@@ -1,0 +1,176 @@
+TÀI LIỆU CHỮ HÁN VÀ CÁCH ĐỌC JLPT
+
+Mục tiêu:
+- Giúp người học sửa lỗi sai về Kanji, cách đọc và cách viết.
+- Hiểu mối liên hệ giữa chữ Hán, cách đọc kana và nghĩa tiếng Việt.
+- Luyện ngay với ví dụ và bài tập ngắn.
+
+----------------------------------------
+1. VÌ SAO NGƯỜI HỌC THƯỜNG SAI KANJI?
+----------------------------------------
+
+Các lỗi phổ biến:
+- Nhìn mặt chữ quen nhưng quên cách đọc.
+- Nhớ nghĩa nhưng viết sai Kanji.
+- Biết từ riêng lẻ nhưng không nhận ra khi đặt trong câu.
+- Nhầm âm On-yomi và Kun-yomi.
+
+Ví dụ:
+- 発見（はっけん）: phát hiện
+- 得意（とくい）: giỏi, sở trường
+- 正常（せいじょう）: bình thường
+
+----------------------------------------
+2. CÁCH HỌC KANJI HIỆU QUẢ
+----------------------------------------
+
+2.1. Học theo cụm:
+- Không học từng chữ rời rạc.
+- Học theo cả từ sẽ dễ nhớ hơn.
+
+Ví dụ:
+- 発 -> 発見（phát hiện）
+- 意 -> 得意（sở trường）
+- 常 -> 正常（bình thường）
+
+2.2. Học theo 4 cột:
+- Kanji
+- Kana
+- Nghĩa
+- Ví dụ
+
+Ví dụ:
+- 発見 | はっけん | phát hiện | 新しい星が発見された。
+- 得意 | とくい | giỏi | 彼はダンスが得意だ。
+- 正常 | せいじょう | bình thường | 機械は正常に動いている。
+
+2.3. Luyện bằng hai chiều:
+- Nhìn Kanji -> đọc Kana.
+- Nhìn nghĩa tiếng Việt -> viết lại Kanji.
+
+----------------------------------------
+3. MỘT SỐ TỪ DỄ SAI Ở JLPT N3
+----------------------------------------
+
+3.1. 発見（はっけん）
+Nghĩa:
+- Phát hiện.
+
+Ví dụ:
+- 新しい星が発見された。
+  Một ngôi sao mới đã được phát hiện.
+
+3.2. 得意（とくい）
+Nghĩa:
+- Giỏi, sở trường.
+
+Ví dụ:
+- 彼は料理が得意です。
+  Anh ấy giỏi nấu ăn.
+
+3.3. 正常（せいじょう）
+Nghĩa:
+- Bình thường.
+
+Ví dụ:
+- 機械が正常かどうか調べてください。
+  Hãy kiểm tra xem máy có bình thường hay không.
+
+3.4. 落ち着く（おちつく）
+Nghĩa:
+- Bình tĩnh, ổn định.
+
+Ví dụ:
+- 困ったときこそ落ち着いてください。
+  Chính lúc khó khăn thì càng phải bình tĩnh.
+
+----------------------------------------
+4. MẸO NHỚ KANJI LÂU HƠN
+----------------------------------------
+
+- Viết mỗi từ 5 lần, đọc to mỗi lần viết.
+- Tự đặt ít nhất 1 câu ngắn với mỗi từ.
+- Gom những từ sai trong đề thành “sổ tay Kanji lỗi sai”.
+- Ôn lại sau 1 ngày, 3 ngày, 7 ngày.
+
+Mẫu ghi chép:
+- Từ:
+- Cách đọc:
+- Nghĩa:
+- Câu ví dụ:
+- Tôi nhầm vì:
+
+----------------------------------------
+5. BÀI TẬP LUYỆN NHANH
+----------------------------------------
+
+Bài 1. Nối Kanji với cách đọc đúng:
+1. 発見
+2. 得意
+3. 正常
+
+a. せいじょう
+b. とくい
+c. はっけん
+
+Bài 2. Điền từ đúng vào chỗ trống:
+1. 彼は歌が（　　　　　）です。
+2. 新しい事実が（　　　　　）された。
+3. この機械は（　　　　　）に動いています。
+
+Gợi ý:
+- 発見
+- 得意
+- 正常
+
+Bài 3. Chọn nghĩa đúng:
+1. 得意
+   a. yếu
+   b. sở trường
+   c. thất bại
+
+2. 発見
+   a. phát hiện
+   b. bắt đầu
+   c. quên mất
+
+3. 正常
+   a. nguy hiểm
+   b. chậm
+   c. bình thường
+
+Bài 4. Tự luyện viết:
+- Viết 3 lần mỗi từ:
+  発見 / 得意 / 正常
+- Sau đó đặt 1 câu cho mỗi từ.
+
+----------------------------------------
+6. ĐÁP ÁN THAM KHẢO
+----------------------------------------
+
+Bài 1:
+1 - c
+2 - b
+3 - a
+
+Bài 2:
+1. 得意
+2. 発見
+3. 正常
+
+Bài 3:
+1. b
+2. a
+3. c
+
+----------------------------------------
+7. BÀI TỰ KIỂM TRA CUỐI
+----------------------------------------
+
+Không nhìn tài liệu, hãy tự trả lời:
+- 発見 đọc là gì?
+- 得意 nghĩa là gì?
+- 正常 dùng trong hoàn cảnh nào?
+- Viết 1 câu có 落ち着く.
+
+Nếu trả lời trôi chảy, bạn đã nắm khá chắc nhóm từ này.
