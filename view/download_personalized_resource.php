@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -30,7 +30,7 @@ if (!$roadmapData) {
 }
 
 if ($mode === 'exam') {
-    $docData = jlpt_ai_build_exam_doc_data($roadmapData);
+    $docData = jlpt_ai_build_exam_doc_data($pdo, $roadmapData);
     $filename = 'ho-so-on-tap-jlpt-' . $resultId . '.html';
 } else {
     if ($skill === '' || $topic === '') {
@@ -44,7 +44,7 @@ if ($mode === 'exam') {
         exit('Không tìm thấy nhóm lỗi phù hợp để tạo tài liệu.');
     }
 
-    $docData = jlpt_ai_build_personalized_doc_data($group, $roadmapData);
+    $docData = jlpt_ai_build_personalized_doc_data($pdo, $group, $roadmapData);
     $filename = 'tai-lieu-ca-nhan-hoa-' . $resultId . '-' . preg_replace('/[^a-z0-9\-]+/i', '-', $skill) . '.html';
 }
 

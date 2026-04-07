@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 function jlpt_ai_get_latest_result_id(PDO $pdo, $userId)
 {
@@ -374,14 +374,49 @@ function jlpt_ai_build_question_exercises(array $mistakes)
 {
     $items = [];
     foreach ($mistakes as $mistake) {
-        $items[] = [
-            'prompt' => 'Làm lại câu #' . $mistake['question_id'] . ' mà không nhìn đáp án.',
-            'question' => $mistake['question'],
-            'hint' => !empty($mistake['explanation']) ? $mistake['explanation'] : 'Đọc lại ngữ cảnh và xác định từ khóa chính.',
-            'answer' => 'Đáp án đúng: ' . $mistake['correct_answer'],
-            'check_type' => 'contains',
-            'expected' => (string) $mistake['correct_answer'],
-        ];
+        if (!empty($mistake['similar_question'])) {
+            $sq = $mistake['similar_question'];
+            $items[] = [
+                'prompt' => 'Làm câu tương tự câu #' . $mistake['question_id'] . ' để ôn tập.',
+                'question' => $sq['content'],
+                'hint' => '',
+                'answer' => 'Đáp án đúng là: ' . $sq['correct_answer'],
+                'check_type' => 'multiple_choice',
+                'expected' => $sq['correct_answer'],
+                'options' => [
+                    'A' => $sq['option_a'],
+                    'B' => $sq['option_b'],
+                    'C' => $sq['option_c'],
+                    'D' => $sq['option_d'],
+                ]
+            ];
+        } else {
+            if (!empty($mistake['option_a'])) {
+                $items[] = [
+                    'prompt' => 'Làm lại câu gốc bạn đã sai (do không có câu tương đồng trong CSDL).',
+                    'question' => $mistake['question'],
+                    'hint' => '',
+                    'answer' => 'Đáp án đúng: ' . $mistake['correct_answer'],
+                    'check_type' => 'multiple_choice',
+                    'expected' => $mistake['correct_answer'],
+                    'options' => [
+                        'A' => $mistake['option_a'],
+                        'B' => $mistake['option_b'],
+                        'C' => $mistake['option_c'],
+                        'D' => $mistake['option_d'],
+                    ]
+                ];
+            } else {
+                $items[] = [
+                    'prompt' => 'Làm lại câu #' . $mistake['question_id'] . ' mà không nhìn đáp án.',
+                    'question' => $mistake['question'],
+                    'hint' => '',
+                    'answer' => 'Đáp án đúng: ' . $mistake['correct_answer'],
+                    'check_type' => 'contains',
+                    'expected' => (string) $mistake['correct_answer'],
+                ];
+            }
+        }
     }
 
     return $items;
@@ -392,39 +427,27 @@ function jlpt_ai_build_focus_exercises($skillKey, $topic, array $mistakes)
     $items = [];
 
     foreach ($mistakes as $mistake) {
-        if ($skillKey === 'grammar') {
+        if (!empty($mistake['option_a'])) {
             $items[] = [
-                'prompt' => 'Giải thích vì sao đáp án đúng phù hợp hơn trong câu sau.',
+                'prompt' => 'Làm lại câu gốc bạn đã sai để củng cố kiến thức.',
                 'question' => $mistake['question'],
-                'hint' => 'Tập trung vào mẫu ngữ pháp "' . $topic . '" và xem câu cần khẳng định, phủ định hay suy đoán.',
-                'answer' => 'Gợi ý chấm: nêu được ý nghĩa mẫu ngữ pháp, ngữ cảnh và vì sao các lựa chọn khác không tự nhiên.',
-                'check_type' => 'non_empty',
-                'expected' => '',
-            ];
-        } elseif ($skillKey === 'kanji') {
-            $items[] = [
-                'prompt' => 'Viết lại cách đọc và nghĩa của từ khóa trong câu sai.',
-                'question' => $mistake['question'],
-                'hint' => 'Tách từ Kanji quan trọng rồi ghi lại theo mẫu: Kanji - Kana - Nghĩa.',
-                'answer' => !empty($mistake['explanation']) ? $mistake['explanation'] : 'Đối chiếu lại Kanji, kana và nghĩa của từ trọng tâm.',
-                'check_type' => 'non_empty',
-                'expected' => '',
-            ];
-        } elseif ($skillKey === 'reading') {
-            $items[] = [
-                'prompt' => 'Tóm tắt ý chính của câu/đoạn bằng 1 câu tiếng Việt.',
-                'question' => $mistake['question'],
-                'hint' => 'Xác định chủ thể, hành động chính và thông tin được nhấn mạnh.',
-                'answer' => !empty($mistake['explanation']) ? $mistake['explanation'] : 'Đọc lại và gạch chân từ nối hoặc từ khóa chính.',
-                'check_type' => 'non_empty',
-                'expected' => '',
+                'hint' => '',
+                'answer' => 'Đáp án đúng là: ' . $mistake['correct_answer'] . (!empty($mistake['explanation']) ? ' - ' . $mistake['explanation'] : ''),
+                'check_type' => 'multiple_choice',
+                'expected' => $mistake['correct_answer'],
+                'options' => [
+                    'A' => $mistake['option_a'],
+                    'B' => $mistake['option_b'],
+                    'C' => $mistake['option_c'],
+                    'D' => $mistake['option_d'],
+                ]
             ];
         } else {
             $items[] = [
-                'prompt' => 'Viết 1 câu mới dùng đúng từ/cách dùng vừa sai.',
+                'prompt' => 'Làm lại câu gốc bạn đã sai.',
                 'question' => $mistake['question'],
-                'hint' => 'Giữ nguyên sắc thái nghĩa của từ trong ngữ cảnh gốc rồi đặt câu mới.',
-                'answer' => !empty($mistake['explanation']) ? $mistake['explanation'] : 'So sánh từ bạn nhầm với từ đúng trong cùng ngữ cảnh.',
+                'hint' => '',
+                'answer' => 'Đáp án: ' . $mistake['correct_answer'],
                 'check_type' => 'non_empty',
                 'expected' => '',
             ];
@@ -513,11 +536,26 @@ function jlpt_ai_render_personalized_html(array $docData)
             <div class="exercise">
                 <div><strong>Yêu cầu:</strong> <?php echo jlpt_ai_escape($exercise['prompt']); ?></div>
                 <div><?php echo jlpt_ai_escape($exercise['question']); ?></div>
+                <?php if (!empty($exercise['hint'])): ?>
                 <div class="muted"><strong>Gợi ý:</strong> <?php echo jlpt_ai_escape($exercise['hint']); ?></div>
-                <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
-                <button class="check-btn" type="button">Chấm ngay</button>
+                <?php endif; ?>
+                
+                <?php if (!empty($exercise['options'])): ?>
+                    <div class="exercise-options" style="margin-top:12px;">
+                        <?php foreach($exercise['options'] as $key => $val): ?>
+                            <label style="display:block; margin-bottom:8px; cursor:pointer;">
+                                <input type="radio" name="q_ex_g_<?php echo $index; ?>" value="<?php echo $key; ?>" class="exercise-radio" data-expected="<?php echo jlpt_ai_escape($exercise['expected']); ?>">
+                                <strong><?php echo $key; ?>.</strong> <?php echo jlpt_ai_escape($val); ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
+                <?php endif; ?>
+                
+                <button class="check-btn" type="button" style="margin-top:12px;">Chấm ngay</button>
                 <div class="check-result"></div>
-                <?php echo jlpt_ai_render_toggle_block('qe-' . $index, 'Hiện đáp án/gợi ý chấm', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
+                <?php echo jlpt_ai_render_toggle_block('qe-' . $index, 'Hiện đáp án', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -527,11 +565,26 @@ function jlpt_ai_render_personalized_html(array $docData)
             <div class="exercise">
                 <div><strong>Yêu cầu:</strong> <?php echo jlpt_ai_escape($exercise['prompt']); ?></div>
                 <div><?php echo jlpt_ai_escape($exercise['question']); ?></div>
+                <?php if (!empty($exercise['hint'])): ?>
                 <div class="muted"><strong>Gợi ý:</strong> <?php echo jlpt_ai_escape($exercise['hint']); ?></div>
-                <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
-                <button class="check-btn" type="button">Chấm ngay</button>
+                <?php endif; ?>
+                
+                <?php if (!empty($exercise['options'])): ?>
+                    <div class="exercise-options" style="margin-top:12px;">
+                        <?php foreach($exercise['options'] as $key => $val): ?>
+                            <label style="display:block; margin-bottom:8px; cursor:pointer;">
+                                <input type="radio" name="f_ex_g_<?php echo $index; ?>" value="<?php echo $key; ?>" class="exercise-radio" data-expected="<?php echo jlpt_ai_escape($exercise['expected']); ?>">
+                                <strong><?php echo $key; ?>.</strong> <?php echo jlpt_ai_escape($val); ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
+                <?php endif; ?>
+
+                <button class="check-btn" type="button" style="margin-top:12px;">Chấm ngay</button>
                 <div class="check-result"></div>
-                <?php echo jlpt_ai_render_toggle_block('fe-' . $index, 'Hiện lời giải/gợi ý', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
+                <?php echo jlpt_ai_render_toggle_block('fe-' . $index, 'Hiện lời giải', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -553,11 +606,26 @@ function jlpt_ai_render_personalized_html(array $docData)
                 <div class="exercise">
                     <div><strong>Yêu cầu:</strong> <?php echo jlpt_ai_escape($exercise['prompt']); ?></div>
                     <div><?php echo jlpt_ai_escape($exercise['question']); ?></div>
+                    <?php if (!empty($exercise['hint'])): ?>
                     <div class="muted"><strong>Gợi ý:</strong> <?php echo jlpt_ai_escape($exercise['hint']); ?></div>
-                    <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
-                    <button class="check-btn" type="button">Chấm ngay</button>
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($exercise['options'])): ?>
+                        <div class="exercise-options" style="margin-top:12px;">
+                            <?php foreach($exercise['options'] as $key => $val): ?>
+                                <label style="display:block; margin-bottom:8px; cursor:pointer;">
+                                    <input type="radio" name="e_ex_g_<?php echo $groupIndex; ?>_<?php echo $index; ?>" value="<?php echo $key; ?>" class="exercise-radio" data-expected="<?php echo jlpt_ai_escape($exercise['expected']); ?>">
+                                    <strong><?php echo $key; ?>.</strong> <?php echo jlpt_ai_escape($val); ?>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <textarea class="exercise-input" placeholder="Nhập đáp án của bạn..." data-check-type="<?php echo jlpt_ai_escape($exercise['check_type'] ?? 'non_empty'); ?>" data-expected="<?php echo jlpt_ai_escape($exercise['expected'] ?? ''); ?>"></textarea>
+                    <?php endif; ?>
+
+                    <button class="check-btn" type="button" style="margin-top:12px;">Chấm ngay</button>
                     <div class="check-result"></div>
-                    <?php echo jlpt_ai_render_toggle_block('eg-' . $groupIndex . '-' . $index, 'Hiện đáp án/gợi ý chấm', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
+                    <?php echo jlpt_ai_render_toggle_block('eg-' . $groupIndex . '-' . $index, 'Hiện đáp án', '<div>' . jlpt_ai_escape($exercise['answer']) . '</div>'); ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -583,9 +651,35 @@ document.querySelectorAll('.check-btn').forEach(function(button){
   button.addEventListener('click', function(){
     var wrap = button.closest('.exercise');
     if(!wrap){return;}
-    var input = wrap.querySelector('.exercise-input');
     var result = wrap.querySelector('.check-result');
-    if(!input || !result){return;}
+    if(!result){return;}
+
+    var radioGroup = wrap.querySelectorAll('.exercise-radio');
+    if (radioGroup.length > 0) {
+        var selected = null;
+        var expected = radioGroup[0].dataset.expected.toLowerCase();
+        radioGroup.forEach(function(r) {
+            if (r.checked) selected = r.value.toLowerCase();
+        });
+        
+        result.className = 'check-result show';
+        if (!selected) {
+            result.classList.add('warn');
+            result.textContent = 'Bạn chưa chọn đáp án.';
+            return;
+        }
+        if (selected === expected) {
+            result.classList.add('ok');
+            result.textContent = 'Chính xác! Đáp án đúng là ' + expected.toUpperCase();
+        } else {
+            result.classList.add('warn');
+            result.textContent = 'Chưa chính xác. Bạn vừa chọn ' + selected.toUpperCase() + '. Hãy xem đáp án đúng.';
+        }
+        return;
+    }
+
+    var input = wrap.querySelector('.exercise-input');
+    if(!input){return;}
     var user = (input.value || '').trim();
     var checkType = input.dataset.checkType || 'non_empty';
     var expected = (input.dataset.expected || '').trim().toLowerCase();
@@ -617,10 +711,36 @@ document.querySelectorAll('.check-btn').forEach(function(button){
     return ob_get_clean();
 }
 
-function jlpt_ai_build_personalized_doc_data(array $group, array $roadmapData)
+function jlpt_ai_build_personalized_doc_data(PDO $pdo, array $group, array $roadmapData)
 {
     $summary = $roadmapData['summary'] ?? [];
     $skillMeta = jlpt_ai_skill_meta($group['skill_key']);
+
+    $mistakes = $group['mistakes'] ?? [];
+    foreach ($mistakes as &$mistake) {
+        if (empty($mistake['option_a']) || empty($mistake['similar_question'])) {
+            $stmt = $pdo->prepare("SELECT level, category, sub_tag, option_a, option_b, option_c, option_d FROM questions WHERE id = ?");
+            $stmt->execute([$mistake['question_id']]);
+            $qInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($qInfo) {
+                if (empty($mistake['option_a'])) {
+                    $mistake['option_a'] = $qInfo['option_a'];
+                    $mistake['option_b'] = $qInfo['option_b'];
+                    $mistake['option_c'] = $qInfo['option_c'];
+                    $mistake['option_d'] = $qInfo['option_d'];
+                }
+                if (empty($mistake['similar_question'])) {
+                    $stmtRand = $pdo->prepare("SELECT content, option_a, option_b, option_c, option_d, correct_answer FROM questions WHERE category = ? AND sub_tag = ? AND level = ? AND id != ? ORDER BY RAND() LIMIT 1");
+                    $stmtRand->execute([$qInfo['category'], $qInfo['sub_tag'], $qInfo['level'], $mistake['question_id']]);
+                    $sq = $stmtRand->fetch(PDO::FETCH_ASSOC);
+                    if ($sq) {
+                        $mistake['similar_question'] = $sq;
+                    }
+                }
+            }
+        }
+    }
+    unset($mistake);
 
     return [
         'mode' => 'group',
@@ -631,9 +751,9 @@ function jlpt_ai_build_personalized_doc_data(array $group, array $roadmapData)
         'group' => [
             'title' => $skillMeta['label'] . ' - ' . $group['topic'],
         ],
-        'mistakes' => $group['mistakes'] ?? [],
-        'question_exercises' => jlpt_ai_build_question_exercises($group['mistakes'] ?? []),
-        'focus_exercises' => jlpt_ai_build_focus_exercises($group['skill_key'], $group['topic'], $group['mistakes'] ?? []),
+        'mistakes' => $mistakes,
+        'question_exercises' => jlpt_ai_build_question_exercises($mistakes),
+        'focus_exercises' => jlpt_ai_build_focus_exercises($group['skill_key'], $group['topic'], $mistakes),
         'next_steps' => [
             'Đọc lại toàn bộ câu sai trong nhóm này ít nhất 2 lần.',
             'Che đáp án đúng và tự làm lại trước khi xem lời giải.',
@@ -643,19 +763,46 @@ function jlpt_ai_build_personalized_doc_data(array $group, array $roadmapData)
     ];
 }
 
-function jlpt_ai_build_exam_doc_data(array $roadmapData)
+function jlpt_ai_build_exam_doc_data(PDO $pdo, array $roadmapData)
 {
     $summary = $roadmapData['summary'] ?? [];
     $groups = [];
     foreach (($roadmapData['mistake_groups'] ?? []) as $group) {
         $meta = jlpt_ai_skill_meta($group['skill_key']);
+        
+        $mistakes = $group['mistakes'] ?? [];
+        foreach ($mistakes as &$mistake) {
+            if (empty($mistake['option_a']) || empty($mistake['similar_question'])) {
+                $stmt = $pdo->prepare("SELECT level, category, sub_tag, option_a, option_b, option_c, option_d FROM questions WHERE id = ?");
+                $stmt->execute([$mistake['question_id']]);
+                $qInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($qInfo) {
+                    if (empty($mistake['option_a'])) {
+                        $mistake['option_a'] = $qInfo['option_a'];
+                        $mistake['option_b'] = $qInfo['option_b'];
+                        $mistake['option_c'] = $qInfo['option_c'];
+                        $mistake['option_d'] = $qInfo['option_d'];
+                    }
+                    if (empty($mistake['similar_question'])) {
+                        $stmtRand = $pdo->prepare("SELECT content, option_a, option_b, option_c, option_d, correct_answer FROM questions WHERE category = ? AND sub_tag = ? AND level = ? AND id != ? ORDER BY RAND() LIMIT 1");
+                        $stmtRand->execute([$qInfo['category'], $qInfo['sub_tag'], $qInfo['level'], $mistake['question_id']]);
+                        $sq = $stmtRand->fetch(PDO::FETCH_ASSOC);
+                        if ($sq) {
+                            $mistake['similar_question'] = $sq;
+                        }
+                    }
+                }
+            }
+        }
+        unset($mistake);
+
         $groups[] = [
             'summary' => [
                 'title' => $meta['label'] . ' - ' . $group['topic'],
                 'summary' => $group['summary'],
             ],
-            'mistakes' => $group['mistakes'] ?? [],
-            'question_exercises' => jlpt_ai_build_question_exercises($group['mistakes'] ?? []),
+            'mistakes' => $mistakes,
+            'question_exercises' => jlpt_ai_build_question_exercises($mistakes),
         ];
     }
 
@@ -712,6 +859,7 @@ function jlpt_ai_generate_roadmap(PDO $pdo, $userId, $resultId = null)
     $stmt = $pdo->prepare(
         "SELECT er.id, er.user_id, er.score, er.total_correct, er.total_incorrect, er.exam_date,
                 q.level, q.category, q.sub_tag, q.content, q.correct_answer, q.explanation,
+                q.option_a, q.option_b, q.option_c, q.option_d,
                 rd.question_id, rd.user_answer, rd.is_correct
          FROM exam_results er
          JOIN result_details rd ON rd.result_id = er.id
@@ -739,6 +887,10 @@ function jlpt_ai_generate_roadmap(PDO $pdo, $userId, $resultId = null)
         $skillKey = jlpt_ai_detect_skill((string) $row['category'], (string) $row['sub_tag']);
         $groupKey = $skillKey . '|' . trim((string) $row['sub_tag']);
 
+        $stmtRand = $pdo->prepare("SELECT content, option_a, option_b, option_c, option_d, correct_answer FROM questions WHERE category = ? AND sub_tag = ? AND level = ? AND id != ? ORDER BY RAND() LIMIT 1");
+        $stmtRand->execute([$row['category'], $row['sub_tag'], $row['level'], $row['question_id']]);
+        $similarQ = $stmtRand->fetch(PDO::FETCH_ASSOC);
+
         if (!isset($mistakeGroups[$groupKey])) {
             $meta = jlpt_ai_skill_meta($skillKey);
             $mistakeGroups[$groupKey] = [
@@ -752,13 +904,21 @@ function jlpt_ai_generate_roadmap(PDO $pdo, $userId, $resultId = null)
         }
 
         $mistakeGroups[$groupKey]['count']++;
-        $mistakeGroups[$groupKey]['mistakes'][] = [
+        $mistakesEntry = [
             'question_id' => (int) $row['question_id'],
             'question' => $row['content'],
             'user_answer' => $row['user_answer'],
             'correct_answer' => $row['correct_answer'],
             'explanation' => $row['explanation'],
+            'option_a' => $row['option_a'],
+            'option_b' => $row['option_b'],
+            'option_c' => $row['option_c'],
+            'option_d' => $row['option_d'],
         ];
+        if ($similarQ) {
+            $mistakesEntry['similar_question'] = $similarQ;
+        }
+        $mistakeGroups[$groupKey]['mistakes'][] = $mistakesEntry;
 
         $wrongQuestions[] = (int) $row['question_id'];
     }
