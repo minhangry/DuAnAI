@@ -1,0 +1,164 @@
+[
+  {
+    "theme": "Công việc & Hoạt động hàng ngày",
+    "vocabulary": [
+      {
+        "word": "包む",
+        "reading": "つつむ",
+        "meaning": "Gói, bọc",
+        "example": "プレゼントを紙で包む。"
+      },
+      {
+        "word": "通勤",
+        "reading": "つうきん",
+        "meaning": "Đi làm",
+        "example": "通勤に1時間かかる。"
+      },
+      {
+        "word": "発見",
+        "reading": "はっけん",
+        "meaning": "Phát hiện",
+        "example": "新しい星が発見された。"
+      },
+      {
+        "word": "残業",
+        "reading": "ざんぎょう",
+        "meaning": "Làm thêm giờ",
+        "example": "仕事が多くて、毎日残業している。"
+      },
+      {
+        "word": "面接",
+        "reading": "めんせつ",
+        "meaning": "Phỏng vấn",
+        "example": "明日はアルバイトの面接がある。"
+      }
+    ]
+  },
+  {
+    "theme": "Tính chất & Trạng thái",
+    "vocabulary": [
+      {
+        "word": "得意",
+        "reading": "とくい",
+        "meaning": "Giỏi, sở trường",
+        "example": "彼はダンスが得意だ。"
+      },
+      {
+        "word": "正常",
+        "reading": "せいじょう",
+        "meaning": "Bình thường",
+        "example": "機械は正常に動いている。"
+      },
+      {
+        "word": "上品",
+        "reading": "じょうひん",
+        "meaning": "Sang trọng, lịch sự",
+        "example": "上品な服を着ている。"
+      },
+      {
+        "word": "きつい",
+        "reading": "きつい",
+        "meaning": "Vất vả, chặt, nghiêm khắc",
+        "example": "この仕事はきつい。"
+      },
+      {
+        "word": "丁寧",
+        "reading": "ていねい",
+        "meaning": "Lịch sự, cẩn thận",
+        "example": "丁寧な言葉を使ってください。"
+      },
+      {
+        "word": "積極적",
+        "reading": "せっきょくてき",
+        "meaning": "Tích cực",
+        "example": "授業に積極的に参加する。"
+      }
+    ]
+  },
+  {
+    "theme": "Cảm xúc & Hành động",
+    "vocabulary": [
+      {
+        "word": "感じ",
+        "reading": "かんじ",
+        "meaning": "Cảm giác",
+        "example": "いい感じがする。"
+      },
+      {
+        "word": "落ち着く",
+        "reading": "おちつく",
+        "meaning": "Bình tĩnh",
+        "example": "落ち着いて行動してください。"
+      }
+    ]
+  },
+  {
+    "theme": "Giao thông & Di chuyển",
+    "vocabulary": [
+      {
+        "word": "渋滞",
+        "reading": "じゅうたい",
+        "meaning": "Tắc đường",
+        "example": "事故で道路が渋滞している。"
+      },
+      {
+        "word": "到着",
+        "reading": "とうちゃく",
+        "meaning": "Đến nơi",
+        "example": "飛行機が定刻に到着した。"
+      },
+      {
+        "word": "乗車",
+        "reading": "じょうしゃ",
+        "meaning": "Lên xe",
+        "example": "駆け込み乗車は危ないです。"
+      }
+    ]
+  },
+  {
+    "theme": "Sức khỏe & Y tế",
+    "vocabulary": [
+      {
+        "word": "回復",
+        "reading": "かいふく",
+        "meaning": "Hồi phục",
+        "example": "父の病気が早く回復してほしい。"
+      },
+      {
+        "word": "栄養",
+        "reading": "えいよう",
+        "meaning": "Dinh dưỡng",
+        "example": "バランスのいい栄養をとる。"
+      },
+      {
+        "word": "診察",
+        "reading": "しんさつ",
+        "meaning": "Khám bệnh",
+        "example": "病院で先生の診察を受ける。"
+      }
+    ]
+  },
+  {
+    "theme": "Giáo dục & Học tập",
+    "vocabulary": [
+      {
+        "word": "暗記",
+        "reading": "あんき",
+        "meaning": "Học thuộc lòng",
+        "example": "新しい単語を暗記する。"
+      },
+      {
+        "word": "参考",
+        "reading": "さんこう",
+        "meaning": "Tham khảo",
+        "example": "この本を参考にレポートを書く。"
+      },
+      {
+        "word": "欠席",
+        "reading": "けっせき",
+        "meaning": "Vắng mặt",
+        "example": "風邪で授業を欠席した。"
+      }
+    ]
+  }
+]

@@ -6,11 +6,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 require_once 'db.php';
 
-$level = $_GET['level'] ?? 'N2';
+$level = $_GET['level'] ?? 'N3';
 // Lấy ngẫu nhiên 20 thẻ để học mỗi lượt
-$stmt = $pdo->prepare("SELECT * FROM grammar_lessons WHERE level = ? ORDER BY RAND() LIMIT 20");
+$stmt = $pdo->prepare("SELECT * FROM flashcards WHERE level = ? ORDER BY RAND() LIMIT 20");
 $stmt->execute([$level]);
-$lessons = $stmt->fetchAll();
+$flashcards = $stmt->fetchAll();
 ?>
 <?php include 'includes/header.php'; ?>
 
@@ -63,19 +63,19 @@ $lessons = $stmt->fetchAll();
         </div>
     </div>
 
-    <?php if (empty($lessons)): ?>
+    <?php if (empty($flashcards)): ?>
         <div class="alert alert-info text-center rounded-4 border-0 shadow-sm">
-            Chưa có dữ liệu thẻ cho trình độ này. Hãy chạy <b>readjson.php</b> để nhập dữ liệu.
+            Chưa có dữ liệu thẻ cho trình độ này. Hãy chạy <b>import_flashcards.php</b> để nhập dữ liệu.
         </div>
     <?php else: ?>
         <div class="text-center mb-3 card-indicator">
-            Thẻ <span id="current-index">1</span> / <span id="total-cards"><?php echo count($lessons); ?></span>
+            Thẻ <span id="current-index">1</span> / <span id="total-cards"><?php echo count($flashcards); ?></span>
         </div>
 
         <div class="flashcard-container mb-5">
             <div class="flashcard" id="card-inner">
                 <div class="flashcard-front">
-                    <h1 class="display-4 fw-bold mb-3" id="front-text"></h1>
+                    <h1 class="display-2 fw-bold mb-3" id="front-text"></h1>
                     <div class="instruction"><i class="bi bi-cursor-fill"></i> Bấm để xem ý nghĩa</div>
                 </div>
                 <div class="flashcard-back">
@@ -95,7 +95,7 @@ $lessons = $stmt->fetchAll();
 </div>
 
 <script>
-    const lessons = <?php echo json_encode($lessons); ?>;
+    const flashcards = <?php echo json_encode($flashcards); ?>;
     let currentIndex = 0;
     const cardInner = document.getElementById('card-inner');
     const frontText = document.getElementById('front-text');
@@ -105,39 +105,44 @@ $lessons = $stmt->fetchAll();
     const nextBtn = document.getElementById('next-btn');
 
     function updateCard() {
-        if (lessons.length === 0) return;
+        if (flashcards.length === 0) return;
         
         // Reset trạng thái lật trước khi đổi nội dung
         cardInner.classList.remove('is-flipped');
         
         setTimeout(() => {
-            const current = lessons[currentIndex];
-            frontText.innerText = current.structure_name.replace(/<[^>]*>?/gm, '');
+            const current = flashcards[currentIndex];
+            frontText.innerText = current.word;
             backText.innerHTML = `
                 <div class="mb-3">
-                    <small class="text-uppercase opacity-75 d-block">Ý nghĩa & Cách dùng:</small>
-                    <div>${current.meaning}</div>
+                    <small class="text-uppercase opacity-75 d-block">Cách đọc (Furigana):</small>
+                    <h3 class="fw-bold">${current.reading}</h3>
                 </div>
-                <div class="small">
-                    <small class="text-uppercase opacity-75 d-block">Cách kết hợp:</small>
-                    <div class="fw-bold">${current.usage_rules}</div>
+                <div class="mb-3">
+                    <small class="text-uppercase opacity-75 d-block">Ý nghĩa:</small>
+                    <div class="fs-5">${current.meaning}</div>
                 </div>
+                ${current.example ? `
+                <div class="small mt-auto pt-3 border-top border-white border-opacity-25">
+                    <small class="text-uppercase opacity-75 d-block">Ví dụ minh họa:</small>
+                    <div class="fst-italic">${current.example}</div>
+                </div>` : ''}
             `;
             indexDisplay.innerText = currentIndex + 1;
-            document.getElementById('total-cards').innerText = lessons.length;
+            document.getElementById('total-cards').innerText = flashcards.length;
             
             prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex === lessons.length - 1;
+            nextBtn.disabled = currentIndex === flashcards.length - 1;
         }, 150);
     }
 
     function masterCard() {
-        if (lessons.length === 0) return;
+        if (flashcards.length === 0) return;
         
         // Xoá thẻ hiện tại khỏi mảng
-        lessons.splice(currentIndex, 1);
+        flashcards.splice(currentIndex, 1);
         
-        if (lessons.length === 0) {
+        if (flashcards.length === 0) {
             // Hiển thị giao diện khi đã thuộc hết
             document.querySelector('.flashcard-container').innerHTML = `
                 <div class="text-center p-5 bg-white rounded-4 shadow-sm border">
@@ -151,15 +156,15 @@ $lessons = $stmt->fetchAll();
             document.querySelector('.d-flex.justify-content-center.gap-4').style.display = 'none';
         } else {
             // Nếu xoá thẻ cuối cùng thì lùi index lại
-            if (currentIndex >= lessons.length) {
-                currentIndex = lessons.length - 1;
+            if (currentIndex >= flashcards.length) {
+                currentIndex = flashcards.length - 1;
             }
             updateCard();
         }
     }
 
     function nextCard() {
-        if (currentIndex < lessons.length - 1) {
+        if (currentIndex < flashcards.length - 1) {
             currentIndex++;
             updateCard();
         }
@@ -189,7 +194,7 @@ $lessons = $stmt->fetchAll();
     });
 
     // Khởi tạo thẻ đầu tiên
-    if (lessons.length > 0) updateCard();
+    if (flashcards.length > 0) updateCard();
 </script>
 
 <?php include 'includes/footer.php'; ?>

@@ -1,0 +1,44 @@
+[
+  {
+    "structure_name": "～って",
+    "meaning": "Dùng để trích dẫn lại lời nói hoặc đặt vấn đề về một chủ đề nào đó (thay cho と, というのは).",
+    "usage_rules": "N / V-thông thường + って",
+    "examples": ["今日はないって言っていましたよ。", "田中さんって人は親切ですね。"],
+    "level": "N3"
+  },
+  {
+    "structure_name": "～たびに",
+    "meaning": "Cứ mỗi lần làm gì đó thì kết quả luôn giống nhau.",
+    "usage_rules": "V-ru / N-no + たびに",
+    "examples": ["山田さんに会うたびにすてきな人だと思う。", "買い物に行くたびに余計なものを買ってしまう。"],
+    "level": "N3"
+  },
+  {
+    "structure_name": "～ございます",
+    "meaning": "Thể lịch sự của あります (Kính ngữ/Lịch sự ngữ).",
+    "usage_rules": "N + でございます / N (vị trí) + にございます",
+    "examples": ["5階にございます。", "こちらは受付でございます。"],
+    "level": "N3"
+  },
+  {
+    "structure_name": "～だけ",
+    "meaning": "Chỉ (giới hạn phạm vi).",
+    "usage_rules": "N / V / Adj + だけ",
+    "examples": ["コーヒーだけにする。", "好きなだけ食べてください。"],
+    "level": "N3"
+  },
+  {
+    "structure_name": "～すぎる",
+    "meaning": "Vượt quá mức độ bình thường (quá...).",
+    "usage_rules": "V-masu (bỏ masu) / Adj-i (bỏ i) / Adj-na (bỏ na) + すぎる",
+    "examples": ["味が濃くなりすぎていました。", "食べすぎてお腹が痛い。"],
+    "level": "N3"
+  },
+  {
+    "structure_name": "～だろう",
+    "meaning": "Dùng để dự đoán hoặc hỏi ý kiến người nghe về một việc gì đó (có lẽ/chắc là).",
+    "usage_rules": "N / V / Adj + だろう",
+    "examples": ["かさがなくても大丈夫だろう。", "明日は雨が降るだろう。"],
+    "level": "N3"
+  }
+]
